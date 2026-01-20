@@ -158,3 +158,8 @@ VALUES (1, 1, 8.50, 1, 1);
 INSERT INTO billing (bill_id, subtotal_labor, subtotal_parts, tax, total_amount, job_id)
 VALUES (1, 50.00, 8.50, 5.85, 64.35, 1);
 ```
+---
+
+## ER Diagram
+
+<img width="2704" height="2704" alt="AutoIMS" src="https://github.com/user-attachments/assets/050a5ebf-0b4c-4297-8f0a-923672c8897a" />
