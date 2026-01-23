@@ -20,12 +20,14 @@ const Login = () => {
 
           
           <div className="flex justify-center gap-4">
+            <Link to ='/Sidebar'>
             <button
               type="button"
-              className="w-full mt-2 rounded-full bg-indigo-700 py-3 text-sm font-semibold tracking-wide cursor-pointer text-white shadow-lg transition hover:-translate-y-0.5"
+              className="w-full mt-2 rounded-full bg-indigo-700 px-32 py-3 text-sm font-semibold tracking-wide cursor-pointer text-white shadow-lg transition hover:-translate-y-0.5"
             >
               Login
             </button> 
+            </Link>
           </div>
           <div className="text-right text-sm mt-2 text-indigo-700 font-medium cursor-pointer hover:underline">
             Forgot Password?
