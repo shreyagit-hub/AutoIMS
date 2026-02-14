@@ -1,4 +1,9 @@
+import { usePopupTrigger } from "./PopupTriggerContext";
+import { useNavigate } from "react-router-dom";
+
 export default function Dashboard() {
+  const { triggerPopup } = usePopupTrigger();
+  const navigate = useNavigate();
   return (
     <div className="space-y-6">
 
@@ -12,19 +17,19 @@ export default function Dashboard() {
 
       {/* Top Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-5 shadow border border-green-200">
+        <div className="bg-linear-to-r from-green-50 to-green-100 rounded-xl p-5 shadow border border-green-200">
           <p className="text-gray-600 text-sm font-medium">Total Revenue</p>
           <h2 className="text-2xl font-bold text-green-700">$0.00</h2>
           <p className="text-green-600 text-sm mt-1">Current month</p>
         </div>
 
-        <div className="bg-gradient-to-r from-red-50 to-red-100 rounded-xl p-5 shadow border border-red-200">
+        <div className="bg-linear-to-r from-red-50 to-red-100 rounded-xl p-5 shadow border border-red-200">
           <p className="text-gray-600 text-sm font-medium">Low Stock Items</p>
           <h2 className="text-2xl font-bold text-red-700">0</h2>
           <p className="text-red-600 text-sm mt-1">Requires attention</p>
         </div>
 
-        <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-xl p-5 shadow border border-indigo-200">
+        <div className="bg-linear-to-r from-indigo-50 to-indigo-100 rounded-xl p-5 shadow border border-indigo-200">
           <p className="text-gray-600 text-sm font-medium">Active Jobs</p>
           <h2 className="text-2xl font-bold text-indigo-700">0</h2>
           <p className="text-indigo-600 text-sm mt-1">Currently running</p>
@@ -224,21 +229,25 @@ export default function Dashboard() {
           <div className="bg-white rounded-xl p-6 shadow border border-gray-100">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-3">
-              <button className="p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-center">
+              <button className="p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-center"
+                onClick={() => { triggerPopup('serviceRequest'); navigate('/sidebar/service_requests'); }}>
                 <span className="block text-blue-600 text-lg mb-1">+</span>
-                <span className="text-sm font-medium text-blue-700">Add Customer</span>
+                <span className="text-sm font-medium text-blue-700">Add Service Requests</span>
               </button>
-              <button className="p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-center">
-                <span className="block text-green-600 text-lg mb-1">🚗</span>
-                <span className="text-sm font-medium text-green-700">Add Vehicle</span>
+              <button className="p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-center"
+                onClick={() => { triggerPopup('employee'); navigate('/sidebar/employees'); }}>
+                <span className="block text-green-600 text-lg mb-1">+</span>
+                <span className="text-sm font-medium text-green-700">Add Employee</span>
               </button>
-              <button className="p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-center">
+              <button className="p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-center"
+                onClick={() => { triggerPopup('inventory'); navigate('/sidebar/inventory'); }}>
                 <span className="block text-purple-600 text-lg mb-1">📦</span>
                 <span className="text-sm font-medium text-purple-700">Add Item</span>
               </button>
-              <button className="p-3 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors text-center">
-                <span className="block text-indigo-600 text-lg mb-1">🔧</span>
-                <span className="text-sm font-medium text-indigo-700">New Job</span>
+              <button className="p-3 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors text-center"
+                onClick={() => navigate('/sidebar/billing')}>
+                <span className="block text-indigo-600 text-lg mb-1">💰</span>
+                <span className="text-sm font-medium text-indigo-700">Billings</span>
               </button>
             </div>
           </div>
