@@ -495,11 +495,8 @@ const Employee = () => {
                   {emp.position} | ID: {emp.employeeId}
                 </div>
                 <div className="mt-2">
-                  <span className="block px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold mb-1">
-                    {emp.jobsDone} jobs
-                  </span>
                   <span className="block px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold">
-                    {emp.rating}
+                    <p>Rating: {emp.rating}</p>
                   </span>
                 </div>
               </div>

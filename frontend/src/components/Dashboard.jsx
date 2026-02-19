@@ -92,7 +92,7 @@ export default function Dashboard() {
   // Format currency
   const formatCurrency = (amount) => {
     const num = parseFloat(amount) || 0;
-    return `$${num.toFixed(2)}`;
+    return `Rs. ${num.toFixed(2)}`;
   };
 
   // Get initials from name
@@ -274,9 +274,6 @@ export default function Dashboard() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-gray-800">
-                        {emp.jobs_done || 0} Jobs
-                      </p>
                       <p className="text-green-600 text-sm">
                         {parseFloat(emp.rating || 0).toFixed(1)}★ Rating
                       </p>
