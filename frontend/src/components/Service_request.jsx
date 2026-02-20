@@ -53,7 +53,7 @@ const Service_request = () => {
         return;
       }
       const response = await fetch(
-        `${API_BASE}/service-requests?include_employees=true`,
+        `${API_BASE_URL}/service-requests?include_employees=true`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const Service_request = () => {
     try {
       const token = getAuthToken();
       if (!token) return;
-      const response = await fetch(`${API_BASE}/employees`, {
+      const response = await fetch(`${API_BASE_URL}/employees`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const Service_request = () => {
     e.preventDefault();
     try {
       const token = getAuthToken();
-      const response = await fetch(`${API_BASE}/service-requests`, {
+      const response = await fetch(`${API_BASE_URL}/service-requests`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -214,7 +214,7 @@ const Service_request = () => {
       }
 
       const response = await fetch(
-        `${API_BASE}/service-requests/${editRequestData.request_id}`,
+        `${API_BASE_URL}/service-requests/${editRequestData.request_id}`,
         {
           method: "PUT",
           headers: {
@@ -255,7 +255,7 @@ const Service_request = () => {
       try {
         const token = getAuthToken();
         const response = await fetch(
-          `${API_BASE}/service-requests/${requestId}`,
+          `${API_BASE_URL}/service-requests/${requestId}`,
           {
             method: "DELETE",
             headers: {

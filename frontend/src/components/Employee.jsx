@@ -83,7 +83,7 @@ const Employee = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${API_BASE}/employees?include_inactive=true`,
+        `${API_BASE_URL}/employees?include_inactive=true`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -149,7 +149,7 @@ const Employee = () => {
 
     try {
       const token = getAuthToken();
-      const response = await fetch(`${API_BASE}/employees`, {
+      const response = await fetch(`${API_BASE_URL}/employees`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -261,7 +261,7 @@ const Employee = () => {
     ) {
       try {
         const token = getAuthToken();
-        const response = await fetch(`${API_BASE}/employees/${employeeId}`, {
+        const response = await fetch(`${API_BASE_URL}/employees/${employeeId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -304,7 +304,7 @@ const Employee = () => {
     try {
       const token = getAuthToken();
       const response = await fetch(
-        `${API_BASE}/employees/${editEmployeeData.employeeId}`,
+        `${API_BASE_URL}/employees/${editEmployeeData.employeeId}`,
         {
           method: "PUT",
           headers: {

@@ -38,8 +38,8 @@ export default function Dashboard() {
         return;
       }
 
-      console.log("[DEBUG] Fetching dashboard from:", `${API_BASE}/dashboard`);
-      const response = await fetch(`${API_BASE}/dashboard`, {
+      console.log("[DEBUG] Fetching dashboard from:", `${API_BASE_URL}/dashboard`);
+      const response = await fetch(`${API_BASE_URL}/dashboard`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
