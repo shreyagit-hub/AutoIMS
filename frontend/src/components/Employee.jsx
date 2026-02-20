@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL =   "https://autoims-ot8v.onrender.com" || "http://localhost:5000";
+const API_BASE_URL = "https://autoims-ot8v.onrender.com" || "http://localhost:5000";
 
 // Helper to get auth token from localStorage
 const getAuthToken = () => localStorage.getItem("token");
@@ -193,10 +193,10 @@ const Employee = () => {
     const updatedEmployees = employeeList.map((employee) =>
       employee.employeeId === employeeId
         ? {
-            ...employee,
-            workingStatus:
-              employee.workingStatus === "Working" ? "Not Working" : "Working",
-          }
+          ...employee,
+          workingStatus:
+            employee.workingStatus === "Working" ? "Not Working" : "Working",
+        }
         : employee,
     );
     setEmployeeList(updatedEmployees);
@@ -430,11 +430,10 @@ const Employee = () => {
                   <td className="p-3">{employee.position}</td>
                   <td className="p-3">
                     <span
-                      className={`px-2 py-1 rounded-full ${
-                        employee.workingStatus === "Working"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
+                      className={`px-2 py-1 rounded-full ${employee.workingStatus === "Working"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                        }`}
                     >
                       {employee.workingStatus}
                     </span>
@@ -442,13 +441,13 @@ const Employee = () => {
                   <td className="p-3">
                     {employee.vehicleId
                       ? employee.vehicleId.split(",").map((v, i) => (
-                          <span
-                            key={i}
-                            className="inline-block bg-gray-100 text-gray-700 rounded px-2 py-0.5 mr-1 mb-1 text-xs font-medium"
-                          >
-                            {v.trim()}
-                          </span>
-                        ))
+                        <span
+                          key={i}
+                          className="inline-block bg-gray-100 text-gray-700 rounded px-2 py-0.5 mr-1 mb-1 text-xs font-medium"
+                        >
+                          {v.trim()}
+                        </span>
+                      ))
                       : ""}
                   </td>
                   <td className="p-3">{employee.rating}</td>
@@ -527,6 +526,9 @@ const Employee = () => {
                 </label>
                 <input
                   name="employeeName"
+                  type="text"
+                  minLength={3}
+                  maxLength={100}
                   value={newEmployee.employeeName}
                   onChange={handleNewEmployeeChange}
                   required
@@ -539,6 +541,8 @@ const Employee = () => {
                 </label>
                 <input
                   name="employeeId"
+                  type="number"
+                  min={1}
                   value={newEmployee.employeeId}
                   onChange={handleNewEmployeeChange}
                   required
@@ -553,6 +557,11 @@ const Employee = () => {
                 </label>
                 <input
                   name="phone"
+                  type="tel"
+                  pattern="[0-9]{10}"
+                  inputMode="numeric"
+                  maxLength={10}
+                  minLength={10}
                   value={newEmployee.phone}
                   onChange={handleNewEmployeeChange}
                   required
@@ -566,6 +575,8 @@ const Employee = () => {
                 <input
                   name="email"
                   type="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  maxLength={100}
                   value={newEmployee.email}
                   onChange={handleNewEmployeeChange}
                   required
@@ -580,23 +591,13 @@ const Employee = () => {
                 </label>
                 <input
                   name="position"
+                  type="text"
                   value={newEmployee.position}
                   onChange={handleNewEmployeeChange}
                   required
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
-              <div className="flex-1">
-                <label className="mb-1 font-medium block">Designation</label>
-                <input
-                  name="designation"
-                  value={newEmployee.designation}
-                  onChange={handleNewEmployeeChange}
-                  className="p-2 border border-gray-300 rounded-xl w-full"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <div className="flex-1">
                 <label className="mb-1 font-medium block">Working Status</label>
                 <select
@@ -609,19 +610,23 @@ const Employee = () => {
                   <option value="Not Working">Not Working</option>
                 </select>
               </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <div className="flex-1">
                 <label className="mb-1 font-medium block">
                   Vehicle IDs (comma separated)
                 </label>
                 <input
                   name="vehicleId"
+                  type="number"
+                  min={1}
+
                   value={newEmployee.vehicleId}
                   onChange={handleNewEmployeeChange}
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <div className="flex-1">
                 <label className="mb-1 font-medium block">Rating</label>
                 <input
@@ -633,16 +638,7 @@ const Employee = () => {
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
-              <div className="flex-1">
-                <label className="mb-1 font-medium block">Jobs Done</label>
-                <input
-                  name="jobsDone"
-                  type="number"
-                  value={newEmployee.jobsDone}
-                  onChange={handleNewEmployeeChange}
-                  className="p-2 border border-gray-300 rounded-xl w-full"
-                />
-              </div>
+
             </div>
             <button
               type="submit"
@@ -676,6 +672,9 @@ const Employee = () => {
                 </label>
                 <input
                   name="employeeName"
+                  type="text"
+                  minLength={3}
+                  maxLength={100}
                   value={editEmployeeData.employeeName}
                   onChange={handleEditEmployeeChange}
                   required
@@ -688,6 +687,8 @@ const Employee = () => {
                 </label>
                 <input
                   name="employeeId"
+                  type="number"
+                  min={1}
                   value={editEmployeeData.employeeId}
                   onChange={handleEditEmployeeChange}
                   required
@@ -703,6 +704,11 @@ const Employee = () => {
                 </label>
                 <input
                   name="phone"
+                  type="tel"
+                  pattern="[0-9]{10}"
+                  inputMode="numeric"
+                  maxLength={10}
+                  minLength={10}
                   value={editEmployeeData.phone || ""}
                   onChange={handleEditEmployeeChange}
                   required
@@ -716,6 +722,8 @@ const Employee = () => {
                 <input
                   name="email"
                   type="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  maxLength={100}
                   value={editEmployeeData.email || ""}
                   onChange={handleEditEmployeeChange}
                   required
@@ -730,23 +738,14 @@ const Employee = () => {
                 </label>
                 <input
                   name="position"
+                  type="text"
                   value={editEmployeeData.position || ""}
                   onChange={handleEditEmployeeChange}
                   required
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
-              <div className="flex-1">
-                <label className="mb-1 font-medium block">Designation</label>
-                <input
-                  name="designation"
-                  value={editEmployeeData.designation || ""}
-                  onChange={handleEditEmployeeChange}
-                  className="p-2 border border-gray-300 rounded-xl w-full"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
+
               <div className="flex-1">
                 <label className="mb-1 font-medium block">Working Status</label>
                 <select
@@ -759,19 +758,22 @@ const Employee = () => {
                   <option value="Not Working">Not Working</option>
                 </select>
               </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <div className="flex-1">
                 <label className="mb-1 font-medium block">
                   Vehicle IDs (comma separated)
                 </label>
                 <input
                   name="vehicleId"
+                  type="number"
+                  min={1}
                   value={editEmployeeData.vehicleId || ""}
                   onChange={handleEditEmployeeChange}
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <div className="flex-1">
                 <label className="mb-1 font-medium block">Rating</label>
                 <input
@@ -783,16 +785,7 @@ const Employee = () => {
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
-              <div className="flex-1">
-                <label className="mb-1 font-medium block">Jobs Done</label>
-                <input
-                  name="jobsDone"
-                  type="number"
-                  value={editEmployeeData.jobsDone}
-                  onChange={handleEditEmployeeChange}
-                  className="p-2 border border-gray-300 rounded-xl w-full"
-                />
-              </div>
+
             </div>
             <button
               type="submit"
