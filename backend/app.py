@@ -28,10 +28,14 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     
     # Enable CORS for frontend (React app running on Vite dev server)
-    CORS(app, origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "https://auto-ims.vercel.app"],
-     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-     allow_headers=["Content-Type", "Authorization"],
-     supports_credentials=True)
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "https://auto-ims.vercel.app"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "supports_credentials": True
+        }
+    })
     
     # Register blueprints
     app.register_blueprint(auth_bp)
