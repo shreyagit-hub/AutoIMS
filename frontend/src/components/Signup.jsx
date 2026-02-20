@@ -29,7 +29,7 @@ const Signup = () => {
           email,
           password,
         }),
-      });
+      })
 
       const data = await response.json();
 
