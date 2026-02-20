@@ -27,6 +27,7 @@ export default function Sidebar() {
   const confirmLogout = () => {
     setShowLogoutPopup(false);
     // Clear any auth tokens here if needed
+    localStorage.removeItem("token");
     navigate("/login");
   };
   const cancelLogout = () => {
