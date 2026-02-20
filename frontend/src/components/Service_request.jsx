@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = "http://localhost:5000/api" || "https://autoims-ot8v.onrender.com/api";
+const API_BASE_URL =   "https://autoims-ot8v.onrender.com" || "http://localhost:5000";
 
 const Service_request = () => {
   const navigate = useNavigate();
