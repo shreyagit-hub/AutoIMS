@@ -545,7 +545,6 @@ const Employee = () => {
                   min={1}
                   value={newEmployee.employeeId}
                   onChange={handleNewEmployeeChange}
-                  required
                   className="p-2 border border-gray-300 rounded-xl w-full"
                 />
               </div>
