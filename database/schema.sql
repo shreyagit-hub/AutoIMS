@@ -35,14 +35,19 @@ CREATE TABLE vehicle_service.customers(
 );
 
 -- 5. VEHICLES
-CREATE TABLE vehicle_service.vehicles(
+CREATE TABLE vehicle_service.vehicles (
     vehicle_id SERIAL PRIMARY KEY,
     plate_no VARCHAR(20) UNIQUE NOT NULL,
     brand VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
     year INT NOT NULL,
     color VARCHAR(30) NOT NULL,
-    customer_id INT REFERENCES vehicle_service.customers(customer_id)
+    customer_id INT,
+    CONSTRAINT fk_customer
+        FOREIGN KEY (customer_id)
+        REFERENCES vehicle_service.customers(customer_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 -- 6. SERVICE REQUEST
@@ -53,7 +58,11 @@ CREATE TABLE vehicle_service.service_requests(
     problem_note TEXT,
     status VARCHAR(20) NOT NULL DEFAULT 'Pending',
     priority VARCHAR(20) NOT NULL DEFAULT 'Normal',
-    vehicle_id INT REFERENCES vehicle_service.vehicles(vehicle_id)
+    vehicle_id INT
+        FOREIGN KEY (vehicle_id)
+        REFERENCES vehicle_service.vehicles(vehicle_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 -- 7. SERVICE JOB
@@ -63,8 +72,8 @@ CREATE TABLE vehicle_service.service_jobs(
     end_time TIMESTAMP,
     labor_charge NUMERIC(10,2),
     job_status VARCHAR(20) NOT NULL DEFAULT 'In Progress',
-    request_id INT REFERENCES vehicle_service.service_requests(request_id),
-    employee_id INT REFERENCES vehicle_service.employees(id)
+    request_id INT REFERENCES vehicle_service.service_requests(request_id) ON DELETE CASCADE ON UPDATE CASCADE, --inline
+    employee_id INT REFERENCES vehicle_service.employees(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- 8. INVENTORY
@@ -86,8 +95,8 @@ CREATE TABLE vehicle_service.job_parts_used(
     job_part_id SERIAL PRIMARY KEY,
     quantity_used INT NOT NULL,
     unit_price_at_time NUMERIC(10,2) NOT NULL,
-    job_id INT REFERENCES vehicle_service.service_jobs(job_id),
-    part_id INT REFERENCES vehicle_service.inventory(part_id)
+    job_id INT REFERENCES vehicle_service.service_jobs(job_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    part_id INT REFERENCES vehicle_service.inventory(part_id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
 -- 10. BILLING
@@ -99,7 +108,7 @@ CREATE TABLE vehicle_service.billing(
     tax NUMERIC(10,2) NOT NULL DEFAULT 0.00,
     total_amount NUMERIC(10,2) NOT NULL,
     payment_status VARCHAR(20) NOT NULL DEFAULT 'Unpaid',
-    job_id INT REFERENCES vehicle_service.service_jobs(job_id)
+    job_id INT REFERENCES vehicle_service.service_jobs(job_id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
 -- Add the missing column to the billing table
